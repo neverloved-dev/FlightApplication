@@ -3,6 +3,7 @@ using System;
 using FlightApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlightApplication.Migrations
 {
     [DbContext(typeof(FlightTicketDbContext))]
-    partial class FlightTicketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717100242_UserId")]
+    partial class UserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,10 @@ namespace FlightApplication.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("FlightTicketId")
+                    b.Property<int>("FlightTicketId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("FlightTicketId1")
                         .HasColumnType("integer");
 
                     b.Property<int>("Gender")
@@ -79,7 +85,18 @@ namespace FlightApplication.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FlightTicketId1");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FlightApplication.Models.User", b =>
+                {
+                    b.HasOne("FlightApplication.Models.FlightTicket", "FlightTicket")
+                        .WithMany()
+                        .HasForeignKey("FlightTicketId1");
+
+                    b.Navigation("FlightTicket");
                 });
 #pragma warning restore 612, 618
         }

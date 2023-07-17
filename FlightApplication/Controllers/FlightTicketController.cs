@@ -14,11 +14,13 @@ namespace FlightApplication.Controllers
             _context = context;
         }
         [HttpPost]
-        public ActionResult AddNewUser(User user)
+        public ActionResult AddNewTicket(FlightTicket ticket)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return Ok(user);
+            if (ticket.Class == FlightClass.P)
+            {
+                ticket.Class = FlightClass.R;
+            }
+            return Ok(ticket);
         }
     }
 }

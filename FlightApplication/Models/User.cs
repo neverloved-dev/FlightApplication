@@ -13,6 +13,7 @@ namespace FlightApplication.Models
     public class User
     {
         private int _age;
+        private GenderMarks _gender;
         public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get { return _age; } 
@@ -26,20 +27,19 @@ namespace FlightApplication.Models
                 _age = value;
             } 
         }
-        public GenderMarks Gender { get { return Gender; } 
+        public GenderMarks Gender { get { return _gender; } 
             set 
             {
                 if (Age < 12) 
                 {
                     if (value == GenderMarks.X) 
                     {
-                        Gender = GenderMarks.x;
+                        _gender = GenderMarks.x;
                     }
-                    Gender = GenderMarks.y;
+                    _gender = GenderMarks.y;
                 }
             } 
         }
-        public int FlightTicketId { get; set; }
-        public FlightTicket? FlightTicket { get;set; }
+        public int? FlightTicketId { get; set; }
     }
 }

@@ -39,6 +39,6 @@
         public DateTime FromTime { get; set; }
         public DateTime ToTime { get; set; }
         
-        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -39,5 +39,7 @@ namespace FlightApplication.Models
                 }
             } 
         }
+        public int FlightTicketId { get; set; }
+        public FlightTicket? FlightTicket { get;set; }
     }
 }

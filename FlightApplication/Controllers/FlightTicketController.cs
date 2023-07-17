@@ -16,10 +16,17 @@ namespace FlightApplication.Controllers
         [HttpPost]
         public ActionResult AddNewTicket(FlightTicket ticket)
         {
-            if (ticket.Class == FlightClass.P)
+            var user = _context.Users.Find(ticket.UserId);
+            if(user.Age>18 && ticket.Meal == MealMark.g || ticket.Meal == MealMark.h || ticket.Meal == MealMark.k)
             {
-                ticket.Class = FlightClass.R;
+                return BadRequest("This is an adult ordering child's meal");
             }
+            if (ticket.Destination == DestinationMark.U && ticket.Class == FlightClass.P)
+            {
+                return BadRequest("UK has no first class");
+            }
+            _context.FlightTicket.Add(ticket);
+            _context.SaveChanges();
             return Ok(ticket);
         }
     }

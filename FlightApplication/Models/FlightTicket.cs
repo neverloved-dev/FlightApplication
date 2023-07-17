@@ -36,8 +36,7 @@
         public MealMark Meal { get; set; }
         public FlightClass Class { get; set; }
         public FromMark From { get; set; }
-        public DateTime FromTime { get; set; }
-        public DateTime ToTime { get; set; }
+        public DateTime Time { get; set; }
         
         public int UserId { get; set; }
     }
